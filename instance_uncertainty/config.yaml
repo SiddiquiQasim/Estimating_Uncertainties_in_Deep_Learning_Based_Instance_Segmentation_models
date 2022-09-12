@@ -1,0 +1,57 @@
+sampling_technique: 'mcd' # available values: 'mcd' or 'ensemble'
+#==================Download Config ===================
+spliting_config:
+    data_path: '/bigdata/haicu/internal/siddiq41/Data2/bubble_data/'
+    # data location and fulfill the stardist requirement
+    # the input images should be in the path: data_path + 'img/'
+    # the mask images should be in the path: data_path + 'mask/'
+
+    split_path: '/bigdata/haicu/internal/siddiq41/Test/train_validation_data/'
+    data_split: [0.85, 0.15] # [training, test]
+
+#================== Training Config ===================
+training_config:
+    model_path: '/bigdata/haicu/internal/siddiq41/Test/models/'
+    # if using the pipeline from the start 'model_path' is the location the stardist model is saved
+    # if using model already existing model make sure of the following points
+        # for sampling_technique: 'mcd' the satrdist model folder should be at the path ---> model_path + 'MCD'
+        # for sampling_technique: 'ensemble' the satrdist models folder should be at the path ---> model_path + 'Ensemble_{x for x in range(num_models)}'
+    n_rays: 16 # number of radial direction
+    epochs: 100 # number of epochs
+    dropout_rate: 0.5 # dropout rate
+    mcd_pos: 'Output' # position of dropout available options ('Input', 'Down', 'Center', 'Up', 'Output', 'Full')
+    #================ Deep Ensemble technique ================
+    num_models: 10 # if sampling_technique: 'ensemble'
+
+#================ Inference Config ==================
+inference_config:
+    inference_output: '/bigdata/haicu/internal/siddiq41/Test/inference/' # prediction save
+    approach: 'all' # available values: 'all', 'pixel_uncertainty' or 'radial_uncertainty'
+    data_set: 'test' # available values: 'train' or 'test'
+    fpass: 10 # number of forward pass in case of 'mcd' or num_models in case of 'ensemble'
+
+#====================== Clustering Config ======================
+clustering_config:
+  cluster_output: '/bigdata/haicu/internal/siddiq41/Test/cluster/' # cluster dict save
+
+#====================== Calibration Config ======================
+calibration_config:
+  calibration_output: '/bigdata/haicu/internal/siddiq41/Test/calibration/'
+  approach: 'radial_uncertainty' # available values: 'pixel_uncertainty' or'radial_uncertainty'
+  n_bin: 20
+  count: 5 # count<=fpass
+  save_interval: 1
+  save_score: True
+  bootstrap: False # if True --> count<fpass
+  iteration: 20
+
+  #====================== Calibration Plot Config ======================
+calibration_plot_config:
+  calibration_plot_output: '/bigdata/haicu/internal/siddiq41/Test/calibration/'
+  approach: 'all' # available values: 'spatial' or'fraction' or 'hybrid' or 'all'
+  bin: True
+
+  #====================== Uncertainty Visualization Config ======================
+visualize_config:
+  visual_output: '/bigdata/haicu/internal/siddiq41/Test/calibration/'
+  approach: 'radial_uncertainty' # available values: 'pixel_uncertainty' or'radial_uncertainty'
