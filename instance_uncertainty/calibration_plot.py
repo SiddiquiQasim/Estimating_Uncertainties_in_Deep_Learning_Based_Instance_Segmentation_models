@@ -7,13 +7,17 @@ from uncertainty_calculation.addon.plot import calibration_plot
 class Plot:
 
     def __init__(self, _config):
+
+        self.spatial = False
+        self.fraction = False
+        self.hybrid = False
         
         if _config['calibration_plot_config']['approach'] == 'all' or _config['calibration_plot_config']['approach'] == 'spatial':
-            self.spatial == True
+            self.spatial = True
         if _config['calibration_plot_config']['approach'] == 'all' or _config['calibration_plot_config']['approach'] == 'fraction':
-            self.fraction == True
+            self.fraction = True
         if _config['calibration_plot_config']['approach'] == 'all' or _config['calibration_plot_config']['approach'] == 'hybrid':
-            self.hybrid == True
+            self.hybrid = True
 
         self.calibration_output = _config['calibration_config']['calibration_output']
         self.cali_plot = _config['calibration_plot_config']['calibration_plot_output']

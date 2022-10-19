@@ -159,7 +159,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     config_file = getattr(args, 'config', False)
-    img = getattr(args, 'img_ind', False)
+    img = getattr(args, 'img_ind', 0)
 
     with open(config_file,encoding='utf8') as f:
         config = yaml.safe_load(f)
