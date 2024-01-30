@@ -5,7 +5,7 @@ setup(
     packages=find_packages(),
     version='0.1.0',
     description='descr',
-    author='author',
+    author='Qasim',
     license='MIT',
     install_requires=[
         'tqdm==4.64.1',
